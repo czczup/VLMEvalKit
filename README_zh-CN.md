@@ -23,16 +23,16 @@
 
 ## 🆕 更新
 
+- **[2024-06-18]** 支持了 [**SEEDBench2**](https://arxiv.org/abs/2311.17092)，感谢 [**Bohao-Lee**](https://github.com/Bohao-Lee)🔥🔥🔥
+- **[2024-06-18]** 支持了 [**MMT-Bench**](https://mmt-bench.github.io)，感谢 [**KainingYing**](https://github.com/KainingYing)🔥🔥🔥
+- **[2024-06-12]** 支持了 [**GLM-4v-9B**](https://huggingface.co/THUDM/glm-4v-9b)🔥🔥🔥
+- **[2024-06-05]** 支持了 [**WeMM**](https://github.com/scenarios/WeMM)，感谢 [**scenarios**](https://github.com/scenarios)🔥🔥🔥
 - **[2024-05-27]** 支持了 [**Mini InternVL**](https://huggingface.co/OpenGVLab/Mini-InternVL-Chat-2B-V1-5), 感谢 [**czczup**](https://github.com/czczup)🔥🔥🔥
 - **[2024-05-25]** 支持了 [**SEEDBench2_Plus**](https://arxiv.org/abs/2404.16790)，感谢 [**Bohao-Lee**](https://github.com/Bohao-Lee)🔥🔥🔥
 - **[2024-05-24]** 支持了 [**Phi-3-Vision**](https://huggingface.co/microsoft/Phi-3-vision-128k-instruct) 和 [**CogVLM2-Llama3-chat**](https://huggingface.co/THUDM/cogvlm2-llama3-chat-19B) 🔥🔥🔥
 - **[2024-05-23]** 用户 [**binwang777**](https://github.com/binwang777/) 在 VLMEvalKit 中支持了 [**360VL-70B**](https://huggingface.co/qihoo360/360VL-70B)
 - **[2024-05-21]** 支持了 [**MiniCPM-Llama3-V2.5**](https://huggingface.co/openbmb/MiniCPM-Llama3-V-2_5), MiniCPM-V 系列最新的模型，拥有较大的性能提升。🔥🔥🔥
 - **[2024-05-15]** 支持了 [**PaliGemma-3B**](https://huggingface.co/google/paligemma-3b-pt-448), 一个谷歌开源的 3B 多模态模型。 🔥🔥🔥
-- **[2024-05-14]** 支持了 [**GPT-4o**](https://openai.com/index/hello-gpt-4o/) 🔥🔥🔥
-- **[2024-05-07]** 支持了 [**XVERSE-V-13B**](https://github.com/xverse-ai/XVERSE-V-13B/blob/main/vxverse/models/vxverse.py), 感谢 [**YJY123**](https://github.com/YJY123) 🔥🔥🔥
-- **[2024-05-06]** 成立了 VLMEvalKit 用户群组的 Discord 频道: https://discord.gg/evDT4GZmxN，将在这里分享关于 VLMEvalKit 的更新并进行讨论
-- **[2024-05-06]** 支持了两个基于 Llama3 的 VLM 🔥🔥🔥: Bunny-llama3-8B (SigLIP, 输入图像大小 384) 和 llava-llama-3-8b (CLIP-L, 输入图像大小 336), 用户可在我们支持的数十个测试基准上测试这两个模型
 
 ## 📊 评测结果，支持的数据集和模型 <a id="data-model-results"></a>
 ### 评测结果
@@ -45,8 +45,8 @@
 
 | 数据集                                                      | 数据集名称 (用于 run.py)                  | 任务类型 | 数据集                                                       | 数据集名称 (用于 run.py) | 任务类型 |
 | ------------------------------------------------------------ | ------------------------------------------------------ | --------- | --------- | --------- | --------- |
-| [**MMBench Series**](https://github.com/open-compass/mmbench/): <br>MMBench, MMBench-CN, CCBench | MMBench_DEV_[EN/CN]<br>MMBench_TEST_[EN/CN]<br>MMBench_DEV_[EN/CN]_V11<br>MMBench_TEST_[EN/CN]_V11<br>CCBench | Multi-choice <br>Question (MCQ) | [**MMStar**](https://github.com/MMStar-Benchmark/MMStar) | MMStar | MCQ |
-| [**MME**](https://github.com/BradyFU/Awesome-Multimodal-Large-Language-Models/tree/Evaluation) | MME | Yes or No (Y/N)                                         | [**SEEDBench Series**](https://github.com/AILab-CVC/SEED-Bench) | SEEDBench_IMG, SEEDBench2_Plus           | MCQ                                                |
+| [**MMBench Series**](https://github.com/open-compass/mmbench/): <br>MMBench, MMBench-CN, CCBench | MMBench\_DEV\_[EN/CN] <br>MMBench\_TEST\_[EN/CN] <br>MMBench\_DEV\_[EN/CN]\_V11 <br>MMBench\_TEST\_[EN/CN]\_V11 <br>CCBench | Multi-choice <br>Question (MCQ) | [**MMStar**](https://github.com/MMStar-Benchmark/MMStar) | MMStar | MCQ |
+| [**MME**](https://github.com/BradyFU/Awesome-Multimodal-Large-Language-Models/tree/Evaluation) | MME | Yes or No (Y/N)                                         | [**SEEDBench Series**](https://github.com/AILab-CVC/SEED-Bench) | SEEDBench_IMG <br>SEEDBench2 <br>SEEDBench2_Plus | MCQ      |
 | [**MM-Vet**](https://github.com/yuweihao/MM-Vet)             | MMVet  | VQA                                              | [**MMMU**](https://mmmu-benchmark.github.io)  | MMMU_DEV_VAL/MMMU_TEST                        | MCQ                                |
 | [**MathVista**](https://mathvista.github.io)                 | MathVista_MINI | VQA                                         | [**ScienceQA_IMG**](https://scienceqa.github.io) | ScienceQA_[VAL/TEST]                     | MCQ                        |
 | [**COCO Caption**](https://cocodataset.org)                  | COCO_VAL | Caption                                              | [**HallusionBench**](https://github.com/tianyi-lab/HallusionBench) | HallusionBench                                | Y/N                             |
@@ -55,7 +55,7 @@
 | [**LLaVABench**](https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild) | LLaVABench | VQA                                            | [**DocVQA**](https://www.docvqa.org)+       | DocVQA_[VAL/TEST]                           | VQA                                         |
 | [**InfoVQA**](https://www.docvqa.org/datasets/infographicvqa)+ | InfoVQA_[VAL/TEST] | VQA | [**OCRBench**](https://github.com/Yuliang-Liu/MultimodalOCR) | OCRBench | VQA |
 | [**RealWorldQA**](https://x.ai/blog/grok-1.5v)            | RealWorldQA | MCQ                                          | [**POPE**](https://github.com/AoiDragon/POPE) | POPE                                           | Y/N                                            |
-| [**Core-MM**](https://github.com/core-mm/core-mm)-          | CORE_MM | VQA                                               | [**SEEDBench2_Plus**](https://arxiv.org/abs/2404.16790) | SEEDBench2_Plus | MCQ |
+| [**Core-MM**](https://github.com/core-mm/core-mm)-          | CORE_MM | VQA                                               | [**MMT-Bench**](https://mmt-bench.github.io)                 | MMT-Bench_[VAL/VAL_MI/ALL/ALL_MI]                | MCQ      |
 
 **\*** 我们只提供了部分模型上的测试结果，剩余模型无法在 zero-shot 设定下测试出合理的精度
 
@@ -82,7 +82,8 @@
 | [**Monkey**](https://github.com/Yuliang-Liu/Monkey)🚅, [**Monkey-Chat**](https://github.com/Yuliang-Liu/Monkey)🚅 | [**EMU2-Chat**](https://github.com/baaivision/Emu)🚅🎞️         | [**Yi-VL-[6B/34B]**](https://huggingface.co/01-ai/Yi-VL-6B)  | [**MMAlaya**](https://huggingface.co/DataCanvas/MMAlaya)🚅    |
 | [**InternLM-XComposer2-[1.8B/7B]**](https://huggingface.co/internlm/internlm-xcomposer2-vl-7b)🚅🎞️ | [**MiniCPM-[V1/V2/V2.5]**](https://huggingface.co/openbmb/MiniCPM-V)🚅 | [**OmniLMM-12B**](https://huggingface.co/openbmb/OmniLMM-12B) | [**InternVL-Chat-[V1-1/V1-2/V1-2-Plus/V1-5]**](https://github.com/OpenGVLab/InternVL)🚅, [**Mini-InternVL-Chat-2B-V1-5**](https://github.com/OpenGVLab/InternVL)🚅 |
 | [**DeepSeek-VL**](https://github.com/deepseek-ai/DeepSeek-VL/tree/main)🎞️ | [**LLaVA-NeXT**](https://llava-vl.github.io/blog/2024-01-30-llava-next/)🚅 | [**Bunny-Llama3**](https://huggingface.co/BAAI/Bunny-Llama-3-8B-V)🚅 | [**XVERSE-V-13B**](https://github.com/xverse-ai/XVERSE-V-13B/blob/main/vxverse/models/vxverse.py) |
-| [**PaliGemma-3B**](https://huggingface.co/google/paligemma-3b-pt-448) 🚅 | [**360VL-70B**](https://huggingface.co/qihoo360/360VL-70B)🚅  | [**Phi-3-Vision**](https://huggingface.co/microsoft/Phi-3-vision-128k-instruct) 🚅 |                                                              |
+| [**PaliGemma-3B**](https://huggingface.co/google/paligemma-3b-pt-448) 🚅 | [**360VL-70B**](https://huggingface.co/qihoo360/360VL-70B)🚅  | [**Phi-3-Vision**](https://huggingface.co/microsoft/Phi-3-vision-128k-instruct) 🚅 | [**WeMM**](https://github.com/scenarios/WeMM)🚅               |
+| [**GLM-4v-9B**](https://huggingface.co/THUDM/glm-4v-9b) 🚅    |                                                              |                                                              |                                                              |
 
 🎞️ 表示支持多图片输入。
 
@@ -94,9 +95,10 @@
 
 **请注意**，某些 VLM 可能无法在某些特定的 transformers 版本下运行，我们建议使用以下设置来评估对应的VLM:
 
-- **请用** `transformers==4.33.0` **来运行**: `Qwen series`, `Monkey series`, `InternLM-XComposer Series`, `mPLUG-Owl2`, `OpenFlamingo v2`, `IDEFICS series`, `VisualGLM`, `MMAlaya`, `SharedCaptioner`, `MiniGPT-4 series`, `InstructBLIP series`, `PandaGPT`, `VXVERSE`.
+- **请用** `transformers==4.33.0` **来运行**: `Qwen series`, `Monkey series`, `InternLM-XComposer Series`, `mPLUG-Owl2`, `OpenFlamingo v2`, `IDEFICS series`, `VisualGLM`, `MMAlaya`, `SharedCaptioner`, `MiniGPT-4 series`, `InstructBLIP series`, `PandaGPT`, `VXVERSE`, `GLM-4v-9B`.
 - **请用** `transformers==4.37.0 ` **来运行**: `LLaVA series`, `ShareGPT4V series`, `TransCore-M`, `LLaVA (XTuner)`, `CogVLM Series`, `EMU2 Series`, `Yi-VL Series`, `MiniCPM-V (v1, v2)`, `OmniLMM-12B`, `DeepSeek-VL series`, `InternVL series`.
-- **请用** `transformers==4.40.0 ` **来运行**: `IDEFICS2`, `Bunny-Llama3`, `MiniCPM-Llama3-V2.5`, `LLaVA-Next series`, `360VL-70B`， `Phi-3-Vision`.
+- **请用** `transformers==4.40.0 ` **来运行**: `IDEFICS2`, `Bunny-Llama3`, `MiniCPM-Llama3-V2.5`, `LLaVA-Next series`, `360VL-70B`， `Phi-3-Vision`，`WeMM`.
+- **请用** `transformers==latest` **来运行**: `PaliGemma-3B`.
 
 **如何测试一个 VLM 是否可以正常运行:**
 
@@ -151,7 +153,7 @@ print(ret)  # 提供的图片中有两个苹果
 
 ## 💻 OpenCompass 的其他项目
 
-- [opencompass](https://github.com/open-compass/opencompass/): 一个大模型评测平台，支持广泛的模型 (LLaMA, LLaMa2, ChatGLM2, ChatGPT, Claude等) 覆盖 50 多个数据集。
+- [Opencompass](https://github.com/open-compass/opencompass/): 一个大模型评测平台，支持广泛的模型 (LLaMA, LLaMa2, ChatGLM2, ChatGPT, Claude等) 覆盖 50 多个数据集。
 - [MMBench](https://github.com/open-compass/MMBench/): 官方代码库 "MMBench: Is Your Multi-modal Model an All-around Player?"
 - [BotChat](https://github.com/open-compass/BotChat/): 评测大模型多轮对话能力。
 - [LawBench](https://github.com/open-compass/LawBench): 对大语言模型的法律知识进行测试。

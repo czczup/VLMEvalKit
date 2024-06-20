@@ -37,7 +37,8 @@ api_models = {
     'GPT4o': partial(GPT4V, model='gpt-4o-2024-05-13', temperature=0, img_size=512, img_detail='low', retry=10),
     'GPT4o_HIGH': partial(GPT4V, model='gpt-4o-2024-05-13', temperature=0, img_size=-1, img_detail='high', retry=10),
     # Gemini-V
-    'GeminiProVision': partial(GeminiProVision, temperature=0, retry=10),
+    'GeminiProVision': partial(GeminiProVision, model='gemini-1.0-pro', temperature=0, retry=10),
+    'GeminiPro1-5': partial(GeminiProVision, model='gemini-1.5-pro', temperature=0, retry=10),
     # Qwen-VL Series
     'QwenVLPlus': partial(QwenVLAPI, model='qwen-vl-plus', temperature=0, retry=10),
     'QwenVLMax': partial(QwenVLAPI, model='qwen-vl-max', temperature=0, retry=10),
@@ -97,6 +98,7 @@ internvl_series = {
     'InternVL-Chat-V1-2-Plus': partial(InternVLChat, model_path='OpenGVLab/InternVL-Chat-V1-2-Plus'),
     'InternVL-Chat-V1-5': partial(InternVLChat, model_path='OpenGVLab/InternVL-Chat-V1-5'),
     'Mini-InternVL-Chat-2B-V1-5': partial(InternVLChat, model_path='OpenGVLab/Mini-InternVL-Chat-2B-V1-5'),
+    'Mini-InternVL-Chat-4B-V1-5': partial(InternVLChat, model_path='OpenGVLab/Mini-InternVL-Chat-4B-V1-5'),
 }
 
 yivl_series = {
@@ -135,9 +137,14 @@ deepseekvl_series = {
 }
 
 cogvlm_series = {
-    'cogvlm-grounding-generalist':partial(CogVlm, model_path='THUDM/cogvlm-grounding-generalist-hf', tokenizer_name='lmsys/vicuna-7b-v1.5'),
-    'cogvlm-chat':partial(CogVlm, model_path='THUDM/cogvlm-chat-hf', tokenizer_name='lmsys/vicuna-7b-v1.5'),
-    'cogvlm2-llama3-chat-19B':partial(CogVlm, model_path='THUDM/cogvlm2-llama3-chat-19B'),
+    'cogvlm-grounding-generalist': partial(CogVlm, model_path='THUDM/cogvlm-grounding-generalist-hf', tokenizer_name='lmsys/vicuna-7b-v1.5'),
+    'cogvlm-chat': partial(CogVlm, model_path='THUDM/cogvlm-chat-hf', tokenizer_name='lmsys/vicuna-7b-v1.5'),
+    'cogvlm2-llama3-chat-19B': partial(CogVlm, model_path='THUDM/cogvlm2-llama3-chat-19B'),
+    'glm-4v-9b': partial(GLM4v, model_path='THUDM/glm-4v-9b')
+}
+
+wemm_series = {
+    'WeMM': partial(WeMM, model_path='feipengma/WeMM'),
 }
 
 supported_VLM = {}
@@ -146,7 +153,7 @@ model_groups = [
     ungrouped, api_models, 
     xtuner_series, qwen_series, llava_series, internvl_series, yivl_series,
     xcomposer_series, minigpt4_series, idefics_series, instructblip_series,
-    deepseekvl_series, minicpm_series, cogvlm_series
+    deepseekvl_series, minicpm_series, cogvlm_series, wemm_series
 ]
 
 for grp in model_groups:

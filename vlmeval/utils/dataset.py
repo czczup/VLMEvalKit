@@ -3,11 +3,6 @@ import hashlib
 from ..smp import *
 from .dataset_config import dataset_URLs, dataset_md5_dict, DATASET_TYPE
 from .custom_prompt import CustomPrompt
-from .matching_util import can_infer
-
-
-def isliststr(s):
-    return (s[0] == '[') and (s[-1] == ']')
 
 
 def check_md5(data_path, dataset):
@@ -46,27 +41,34 @@ def split_MMMU(msgs):
     return segs
 
 
-def MMMU_result_transfer(result_path):
-    res = {}
-    result_data = load(result_path)
-    mcq = result_data['A'].notna()
-    lt = len(result_data)
-    for i in range(lt):
-        line = result_data.iloc[i]
-        if mcq[i]:
-            options = {
-                cand: line[cand]
-                for cand in string.ascii_uppercase
-                if cand in line and not pd.isna(line[cand])
-            }
-            prediction = line['prediction']
-            infer_prediction = can_infer(prediction, options)
-            res[line['id']] = infer_prediction
+def prep_tsv(dataset):
+    data_root = LMUDataRoot()
+    assert osp.exists(data_root)
+    update_flag = False
+
+    if dataset in dataset_URLs:
+        url = dataset_URLs[dataset]
+        file_name = url.split('/')[-1]
+        data_path = osp.join(data_root, file_name)
+
+        if osp.exists(data_path) and check_md5(data_path, dataset):
+            pass
         else:
-            res[line['id']] = line['prediction']
-    result_json = result_path.replace('.xlsx', '.json')
-    dump(res, result_json)
-    return result_json
+            warnings.warn('The dataset tsv is not downloaded')
+            download_file(url, data_path)
+            update_flag = True
+    else:
+        data_path = osp.join(data_root, dataset + '.tsv')
+        assert osp.exists(data_path)
+
+    if file_size(data_path, 'GB') > 1:
+        local_path = data_path.replace('.tsv', '_local.tsv')
+        if not osp.exists(local_path) or update_flag or os.environ.get('FORCE_LOCAL', None):
+            from ..tools import LOCALIZE
+            LOCALIZE(data_path, local_path)
+        return local_path
+    else:
+        return data_path
 
 
 class TSVDataset(CustomPrompt):
@@ -74,26 +76,11 @@ class TSVDataset(CustomPrompt):
     def __init__(self, dataset='MMBench', skip_noimg=True):
 
         self.data_root = LMUDataRoot()
-        assert osp.exists(self.data_root)
-
         self.dataset = dataset
         self.dataset_type = DATASET_TYPE(dataset)
+        self.data_path = prep_tsv(dataset)
+        data = load(self.data_path)
 
-        if dataset in dataset_URLs:
-            url = dataset_URLs[dataset]
-            file_name = url.split('/')[-1]
-            data_path = osp.join(self.data_root, file_name)
-
-            if osp.exists(data_path) and check_md5(data_path, dataset):
-                pass
-            else:
-                warnings.warn('The dataset tsv is not downloaded')
-                download_file(url, data_path)
-        else:
-            data_path = osp.join(self.data_root, dataset + '.tsv')
-            assert osp.exists(data_path)
-
-        data = load(data_path)
         self.skip_noimg = skip_noimg
         if skip_noimg and 'image' in data:
             data = data[~pd.isna(data['image'])]
@@ -118,16 +105,13 @@ class TSVDataset(CustomPrompt):
                     assert idx in image_map and len(image_map[idx]) > 64
                     image_map[k] = image_map[idx]
 
-            data['image'] = [
-                eval(image_map[k]) if isliststr(image_map[k]) else image_map[k]
-                for k in data['index']
-            ]
+            images = [toliststr(image_map[k]) for k in data['index']]
+            data['image'] = [x[0] if len(x) == 1 else x for x in images]
             self.meta_only = False
 
         if 'image_path' in data:
-            data['image_path'] = [
-                eval(pths) if isliststr(pths) else pths for pths in data['image_path']
-            ]
+            paths = [toliststr(x) for x in data['image_path']]
+            data['image_path'] = [x[0] if len(x) == 1 else x for x in paths]
 
         if np.all([istype(x, int) for x in data['index']]):
             data['index'] = [int(x) for x in data['index']]
@@ -145,7 +129,7 @@ class TSVDataset(CustomPrompt):
             line = self.data.iloc[line]
 
         if self.meta_only:
-            tgt_path = line['image_path']
+            tgt_path = toliststr(line['image_path'])
         else:
             tgt_path = self.dump_image(line, dataset)
 
@@ -170,7 +154,7 @@ class TSVDataset(CustomPrompt):
                 prompt += 'Please select the correct answer from the options above. \n'
         elif DATASET_TYPE(dataset) == 'VQA':
             if listinstr(['ocrvqa', 'textvqa', 'chartqa', 'docvqa'], dataset.lower()):
-                prompt += '\nPlease try to answer the question with short words or phrases if possible\n.'
+                prompt += '\nAnswer the question using a single word or phrase.\n'
 
         msgs = []
         if isinstance(tgt_path, list):
